@@ -461,6 +461,7 @@ section {
   -webkit-box-flex: 1;
   -ms-flex: 1 1 35rem;
   flex: 1 1 35rem;
+  max-width: 50%;
 }
 
 .review .information span {
@@ -488,8 +489,9 @@ section {
 }
 
 .review .review-slider .slide {
-  background: linear-gradient(130deg, #111 93%, transparent 90%);
+  background: linear-gradient(130deg, #303030 93%, transparent 90%);
   padding: 2rem 3rem;
+  margin-left: 15px;
 }
 
 .review .review-slider .slide p {
@@ -942,4 +944,61 @@ button:hover {
 
 .information .btn:hover {
   background-color:  rgb(255, 116, 47); /* Folosește variabila --blue-d-1 din :root pentru culoare */
+}
+
+/* Review */
+.review-container {
+  display: flex;
+  width: 100vw;
+  gap: 20px; /* Spațiul între fiecare review */
+  padding: 10px; /* Spațiu interior pentru container */
+  overflow-x: auto; /* Scroll orizontal la overflow */
+}
+
+.review-item {
+  background: linear-gradient(130deg, #303030 93%, transparent 90%);
+  padding: 20px;
+  min-width: 200px;
+  max-width: 300px;
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0; /* Previne micșorarea elementelor */
+}
+
+.review-item p {
+  font-size: 1.5rem;
+  line-height: 2;
+  color: #aaa;
+}
+
+.review-item .user {
+  display: flex;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+
+.review-item .user img {
+  height: 5rem;
+  width: 5rem;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.review-item .user h3 {
+  font-size: 2rem;
+  color: #fff;
+}
+
+.review-item .user span {
+  color: rgb(255, 116, 47);
+  font-size: 1.5rem;
+}
+
+.review-item .user i {
+  font-size: 5rem;
+  margin-left: auto;
+  margin-right: 2rem;
+  color: rgb(255, 116, 47);
 }

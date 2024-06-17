@@ -6,8 +6,8 @@ const reviewRoutes = express.Router();
 // POST route to add a new review
 reviewRoutes.post('/', async (req, res) => {
     try {
-        const { name, occupation, review, image, rating } = req.body;
-        const newReview = new ReviewModel({ name, occupation, review, image, rating });
+        const { name, occupation, review, rating } = req.body;
+        const newReview = new ReviewModel({ name, occupation, review, rating });
         await newReview.save();
         console.log('Added');
         return res.status(200).json({ message: 'Review added successfully', review: newReview });

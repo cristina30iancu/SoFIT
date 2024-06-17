@@ -83,24 +83,21 @@ var swiper = new Swiper(".home-slider", {
 });
 
 function createSwiperSlide(review) {
-    const hidden = review.image.length > 0 ? "" : "hidden"
-    const slide = document.createElement('div');
-    slide.innerHTML = `  <div class="swiper-slide slide">
-    <p>${review.review}</p>
-    <div class="user">
-        <img src="${review.image}" ${hidden} alt="">
-        <div class="info">
-            <h3>${review.name}</h3>
+    const reviewItem = document.createElement('div');
+    reviewItem.classList.add('review-item');
+    reviewItem.innerHTML = `
+        <p>${review.review}</p>
+        <div>
+            <h3>${review.name}</h3><br></br>
             <span>${review.occupation}</span> 
+            <i class="fas fa-quote-right"></i>
         </div>
-        <i class="fas fa-quote-left"></i>
-    </div>
-</div>`
-    return slide;
+    `;
+    return reviewItem
 }
 
 function populateSwiper(data) {
-    const swiperWrapper = document.getElementById('swiper-wrapper');
+    const swiperWrapper = document.getElementById('review-container');
     data.forEach(item => {
         const slide = createSwiperSlide(item);
         swiperWrapper.appendChild(slide);

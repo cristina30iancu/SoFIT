@@ -1,7 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
 import { ApiClient } from 'adminjs';
-import { Box, H3, H4, Button, Loader } from '@adminjs/design-system';
+import { Box, H3, Button, Loader } from '@adminjs/design-system';
+
+const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+        return (
+            <div className="custom-tooltip" style={{ backgroundColor: '#fff', padding: '10px', border: '1px solid #ccc' }}>
+                <p className="label">{`Data de ${label}`}</p>
+                <p className="intro">{`Nr rezervări: ${payload[0].value}`}</p>
+            </div>
+        );
+    }
+
+    return null;
+};
 
 const Dashboard = () => {
     const [bookingData, setBookingData] = useState([]);
@@ -11,10 +24,7 @@ const Dashboard = () => {
     const [antrenoriLiberi, setAntrenoriLiberi] = useState('');
     const api = new ApiClient();
 
-    // Function to generate an array of months in the format [{value: '04', label: 'April'}, ...]
     const generateMonthOptions = () => {
-        const currentDate = new Date();
-        const currentYear = currentDate.getFullYear();
         const monthNames = [
             'Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie', 'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'
         ];
@@ -148,7 +158,7 @@ const Dashboard = () => {
                             <CartesianGrid strokeDasharray="3 3" />
                             <XAxis dataKey="name" />
                             <YAxis />
-                            <Tooltip />
+                            <Tooltip content={<CustomTooltip />} />
                             <Bar dataKey="value" fill="#8884d8" />
                         </BarChart>
                     </ResponsiveContainer>

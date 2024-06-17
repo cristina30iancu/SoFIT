@@ -27,10 +27,17 @@ signupBtn.addEventListener("click", (e) => {
     let name = document.querySelector(".signup-wrap form #name").value;
     let email = document.querySelector(".signup-wrap form #email").value;
     let password = document.querySelector(".signup-wrap form #signup-password").value;
+    let confirm = document.querySelector(".signup-wrap form #confirm-password").value;
     let address = document.querySelector(".signup-wrap form #address").value;
     let phone = document.querySelector(".signup-wrap form #telefon").value;
-    if (!name || !email || !password || !address || !phone) {
+    if (!name || !email || !password || !address || !phone || !confirm) {
         return alert("Completează toate câmpurile!")
+    }
+    if(password != confirm){
+        return alert("Parolele nu coincid!")
+    }
+    if(phone.length != 10){
+        return alert("Dați un telefon valid!")
     }
     let obj = {
         name,
@@ -62,7 +69,7 @@ async function registerNewUser(obj) {
             sessionStorage.setItem("address", obj.address);
             sessionStorage.setItem("phone", obj.phone);
             alert("Te-ai înregistrat cu succes");
-            window.location.href = 'index.html'; // Redirecționează utilizatorul la pagina de cont
+            window.location.href = 'Login.html'; // Redirecționează utilizatorul la pagina de cont
         } else {
             alert("Ceva nu a funcționat!");
         }

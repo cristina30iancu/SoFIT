@@ -38,8 +38,8 @@
                     <label for="name">Nume</label>
                 </div>
                 <div class="input-area">
-                    <input type="email" id="mail" autocomplete="off" required>
-                    <label for="mail">Email</label>
+                    <input type="email" id="email" autocomplete="off" required>
+                    <label for="email">Email</label>
                 </div>
                 <div class="input-area">
                     <input type="text" id="address" autocomplete="off" required>
@@ -87,7 +87,7 @@
         document.addEventListener('DOMContentLoaded', function () {
             if (sessionStorage.getItem("name")) {
                 document.getElementById('name').value = sessionStorage.getItem("name");
-                document.getElementById('mail').value = sessionStorage.getItem("email");
+                document.getElementById('email').value = sessionStorage.getItem("email");
                 document.getElementById('address').value = sessionStorage.getItem("address");
                 document.getElementById('phone').value = sessionStorage.getItem("phone");
             }
@@ -128,7 +128,7 @@
 
         document.getElementById("edit").onclick = () => {
             const name = document.getElementById('name').value;
-            const email = document.getElementById('mail').value;
+            const email = document.getElementById('email').value;
             const address = document.getElementById('address').value;
             const phone = document.getElementById('phone').value;
             const obj = { name, email, address, phone };
