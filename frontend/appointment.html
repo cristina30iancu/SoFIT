@@ -6,9 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-
     <link rel="stylesheet" href="css/appointment.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="./script/appointment.js"></script>
@@ -16,11 +14,8 @@
 </head>
 
 <body>
-
     <header class="header">
-
         <a href="./index.html" class="logo"> <span>SO</span>FIT </a>
-
     </header>
     <section class="input-part">
         <div id="main_cont">
@@ -33,20 +28,8 @@
                 </div>
                 <div>
                     <select name="slot" id="slot-select">
-                        <option value="">--Te rog alege o opțiune--</option>
-                        <option value="6-8">7:00 - 9:00</option>
-                        <option value="9-11">9:00 - 11:00</option>
-                        <option value="4-6">14:00 - 16:00</option>
-                        <option value="7-9">18:00 - 20:00</option>
-                    </select>
-                </div>
-                <div>
-                    <select name="trainer" id="trainer-select">
-                        <option value="">--Alege un antrenor--</option>
-                        <option value="Trainer1">Popescu David</option>
-                        <option value="Trainer2">Baciu Sorina</option>
-                        <option value="Trainer3">Simion Andrei</option>
-                        <option value="Trainer4">Simionescu Luca</option>
+                        <option value="">--Te rog alege o oră--</option>
+                        <!-- Orele vor fi generate dinamic -->
                     </select>
                 </div>
                 <div>
@@ -55,12 +38,8 @@
             </div>
         </div>
     </section>
-    
-
     <section class="footer">
-
         <div class="box-container">
-
             <div class="box">
                 <h3>Apasă aici</h3>
                 <a class="links" href="#home">Acasa</a>
@@ -68,9 +47,7 @@
                 <a class="links" href="#features">features</a>
                 <a class="links" href="#pricing">Prețuri</a>
                 <a class="links" href="#trainers">Antrenori</a>
-                
             </div>
-
             <div class="box">
                 <h3>Program</h3>
                 <p> Luni : <i> 7:00 - 22:30</i> </p>
@@ -81,7 +58,6 @@
                 <p> Sambată : <i> 7:00 - 21:30 </i> </p>
                 <p> duminica : <i> inchis </i> </p>
             </div>
-
             <div class="box">
                 <h3>Contact</h3>
                 <p> <i class="fas fa-phone"></i>0749209355 </p>
@@ -95,7 +71,6 @@
                     <a href="https://www.linkedin.com/" target="_blank" class="fab fa-linkedin"></a>
                 </div>
             </div>
-
             <div class="box">
                 <h3>Abonează-te pentru noile informații</h3>
                 <p> ❤️</p>
@@ -104,9 +79,7 @@
                     <input type="submit" value="subscribe" class="btn">
                 </form>
             </div>
-
         </div>
-
     </section>
 </body>
 <script type="text/javascript">
@@ -123,18 +96,90 @@
         var maxDate = year + '-' + month + '-' + day;
         $('#inputdate').attr('min', maxDate);
     });
-    document.getElementById('book_appointment').addEventListener('click', function() {
-    var date = document.getElementById('inputdate').value;
-    var timeSlot = document.getElementById('slot-select').value;
-    
-    // Salvăm datele în sessionStorage
-    sessionStorage.setItem('reservationDate', date);
-    sessionStorage.setItem('reservationTime', timeSlot);
-    
-    // Redirecționare către pagina de cont după salvare
-    window.location.href = 'cont.html'; 
-});
 
-    </script>
-  
+    document.getElementById('inputdate').addEventListener('change', updateAvailableSlots);
+
+    function updateAvailableSlots() {
+        var date = document.getElementById('inputdate').value;
+        var trainerId = getUrlParameter('id');
+
+        if (date && trainerId) {
+            // Fetch available slots for the selected date and trainer
+            fetch(`${baseUrl}/trainer/${trainerId}/availability?date=${date}`)
+                .then(response => response.json())
+                .then(data => {
+                    var slotSelect = document.getElementById('slot-select');
+                    slotSelect.innerHTML = '<option value="">--Te rog alege o oră--</option>';
+
+                    var startHour = 8;
+                    var endHour = 17;
+                    for (var hour = startHour; hour <= endHour; hour++) {
+                        var slot = `${hour}:00 - ${hour + 1}:00`;
+                        if (!data.bookedSlots.includes(`${hour}:00 - ${hour + 1}:00`)) {
+                            var option = document.createElement('option');
+                            option.value = slot;
+                            option.text = slot;
+                            slotSelect.appendChild(option);
+                        }
+                    }
+                })
+                .catch(error => console.error('Error fetching availability:', error));
+        }
+    }
+
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+    document.getElementById('book_appointment').addEventListener('click', function() {
+        var date = document.getElementById('inputdate').value;
+        var slot = document.getElementById('slot-select').value;
+        var trainerId = getUrlParameter('id');
+        var token = sessionStorage.getItem("token");
+        var name = sessionStorage.getItem("name");
+
+        console.log("Date:", date, "Slot:", slot, "Token:", token, "Name:", name, "Trainer ID:", trainerId);
+
+        if (!token) {
+            alert("Vă rugăm să vă conectați mai întâi pentru a rezerva o întâlnire!!");
+        } else if (date == "" || slot == "") {
+            alert("Vă rugăm să completați toate câmpurile");
+        } else {
+            let obj = {
+                trainerId: trainerId,
+                bookingDate: date,
+                bookingSlot: slot
+            };
+            bookAnAppointment(obj, token, name);
+        }
+    });
+
+    async function bookAnAppointment(obj, token, name) {
+        try {
+            let res = await fetch(`${baseUrl}/booking/create`, {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                    Authorization: `${token}`
+                },
+                body: JSON.stringify(obj)
+            });
+            let out = await res.json();
+            if (out.msg == "Acest slot nu este disponibil.") {
+                alert("Acest slot nu este disponibil.");
+            } else if (out.msg == "rezervare nouă creată cu succes") {
+                alert(`Hii ${name}, Rezervarea dvs. este confirmată pe ${obj.bookingDate}`);
+            } else {
+                alert("Ceva nu a funcționat!");
+            }
+        } catch (error) {
+            console.log("err", error);
+            alert("Ceva nu a funcționat!");
+        }
+    }
+</script>
+
 </html>

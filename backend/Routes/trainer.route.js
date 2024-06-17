@@ -84,4 +84,23 @@ trainerRouter.delete('/delete/:id', async (req, res) => {
     }
 });
 
+trainerRouter.get('/:trainerId/availability', async (req, res) => {
+    const { trainerId } = req.params;
+    const { date } = req.query;
+
+    if (!date) {
+        return res.status(400).json({ msg: 'Date is required' });
+    }
+
+    try {
+        const bookings = await Booking.find({ trainer: trainerId, bookingDate: new Date(date) });
+
+        const bookedSlots = bookings.map(booking => booking.bookingSlot);
+
+        res.json({ bookedSlots });
+    } catch (error) {
+        res.status(500).json({ msg: 'Server error', error });
+    }
+});
+
 export { trainerRouter };

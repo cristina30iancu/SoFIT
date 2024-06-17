@@ -2,7 +2,7 @@ De făcut:
 
 - Terminat rezervări
 - Abonamente
-
+- de aranjat frumos antrenri admin - da
 
 
 Modificări efectuate:

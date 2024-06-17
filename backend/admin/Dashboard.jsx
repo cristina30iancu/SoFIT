@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts';
 import { ApiClient } from 'adminjs';
-import { Box, H3, Button, Loader } from '@adminjs/design-system';
+import { Box, H3, Button, Loader, InfoBox } from '@adminjs/design-system';
 
 const CustomTooltip = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -21,7 +21,7 @@ const Dashboard = () => {
     const [selectedMonth, setSelectedMonth] = useState('');
     const [months, setMonths] = useState([]);
     const [showLoader, setShowLoader] = useState(false);
-    const [antrenoriLiberi, setAntrenoriLiberi] = useState('');
+    const [antrenoriLiberi, setAntrenoriLiberi] = useState([]);
     const api = new ApiClient();
 
     const generateMonthOptions = () => {
@@ -109,7 +109,7 @@ const Dashboard = () => {
     const handleAntrenoriLiberi = async () => {
         setShowLoader(true);
         if (antrenoriLiberi.length > 0) {
-            setAntrenoriLiberi('');
+            setAntrenoriLiberi([]);
             return;
         }
         const trainers = await downloadResource('trainer');
@@ -181,15 +181,25 @@ const Dashboard = () => {
                     {antrenoriLiberi.length === 0 ? 'Afișează' : 'Ascunde'}
                 </Button>
                 {antrenoriLiberi.length > 0 && (
-                    <div>
+                    <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '20px' }}>
                         {antrenoriLiberi.map((trainer, index) => (
-                            <div key={index}>
-                                <img src={trainer.image} alt={`Poză Antrenor ${index + 1}`} width="200px" height="200px" />
-                                <h2>{trainer.name}</h2>
-                                <p>Vârstă: {trainer.age}</p>
-                                <p>Gen: {trainer.gender}</p>
-                                <p>Specializare: {trainer.specialization}</p>
-                                <p>Preț/oră: {trainer.price} lei</p>
+                            <div key={index} style={{
+                                flex: '1 1 calc(25% - 20px)',
+                                boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2)',
+                                margin: '10px',
+                                borderRadius: '10px',
+                                overflow: 'hidden',
+                                backgroundColor: '#fff',
+                                textAlign: 'center'
+                            }}>
+                                <img src={trainer.image} alt={`Poză Antrenor ${index + 1}`} style={{ height: '200px', objectFit: 'contain' }} />
+                                <div style={{ padding: '20px' }}>
+                                    <h5>{trainer.name}</h5>
+                                    <p>Vârstă: {trainer.age}</p>
+                                    <p>Gen: {trainer.gender}</p>
+                                    <p>Specializare: {trainer.specialization}</p>
+                                    <p>Preț/oră: {trainer.price} lei</p>
+                                </div>
                             </div>
                         ))}
                     </div>
