@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/recenzie.css">
+
+    <title>Form Reviews</title>
+</head>
+
+<body>
+
+
+    <div class="wrapper">
+        <h3>Vrem să știm părerea ta.</h3>
+        <form action="#">
+            <div class="rating">
+                <input type="number" name="rating" hidden>
+                <i class='bx bx-star star' style="--i: 0;"></i>
+                <i class='bx bx-star star' style="--i: 1;"></i>
+                <i class='bx bx-star star' style="--i: 2;"></i>
+                <i class='bx bx-star star' style="--i: 3;"></i>
+                <i class='bx bx-star star' style="--i: 4;"></i>
+            </div>
+
+            <div class="input-group">
+                <input type="text" name="name" placeholder="Nume" required>
+                <input type="text" name="occupation" placeholder="Ocupație" required>
+            </div>
+            <textarea name="review" cols="30" rows="5" placeholder="Opinia ta..."></textarea>
+
+            <div class="upload-btn-wrapper">
+                <p>Încarcă o poză</p>
+                <input type="file" id="picInput" name="image" accept="image/*">
+                <button type="button" onclick="document.getElementById('fileInput').click();" class="camera-btn">
+                    <i class='bx bx-camera'></i>
+                </button>
+
+            </div>
+            <div class="btn-group">
+                <button type="submit" class="btn submit">Trimite</button>
+                <a href="index.html" class="btn cancel">Înapoi</a>
+            </div>
+        </form>
+    </div>
+    <script>
+        let baseUrl = `http://localhost:8080`
+        const allStar = document.querySelectorAll('.rating .star')
+        const ratingValue = document.querySelector('.rating input')
+
+        allStar.forEach((item, idx) => {
+            item.addEventListener('click', function () {
+                let click = 0
+                ratingValue.value = idx + 1
+
+                allStar.forEach(i => {
+                    i.classList.replace('bxs-star', 'bx-star')
+                    i.classList.remove('active')
+                })
+                for (let i = 0; i < allStar.length; i++) {
+                    if (i <= idx) {
+                        allStar[i].classList.replace('bx-star', 'bxs-star')
+                        allStar[i].classList.add('active')
+                    } else {
+                        allStar[i].style.setProperty('--i', click)
+                        click++
+                    }
+                }
+            })
+        });
+
+        async function getBase64Image() {
+            return new Promise((resolve, reject) => {
+                const imageInput = document.getElementById("picInput");
+                const imageFile = imageInput.files[0];
+
+                if (!imageFile) {
+                    reject(new Error("No image selected"));
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    resolve(event.target.result);
+                };
+                reader.onerror = function (error) {
+                    reject(error);
+                };
+                reader.readAsDataURL(imageFile);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const form = document.querySelector("form");
+
+            form.addEventListener("submit", async (event) => {
+                event.preventDefault();
+                const formData = new FormData(form);
+                const reviewData = {};
+                for (let [key, value] of formData.entries()) {
+                    reviewData[key] = value;
+                }
+
+                const imageInput = document.getElementById("picInput");
+                const imageFile = imageInput.files[0];
+
+                if (imageFile) {
+                    try {
+                        const image = await getBase64Image();
+                        reviewData.image = image;
+                    } catch (error) {
+                        console.error("Error while getting base64 image:", error);
+                    }
+                } else reviewData.image = "";
+                console.log(reviewData);
+                await addReview(reviewData);
+            });
+        });
+
+        async function addReview(reviewData) {
+            try {
+                let res = await fetch(`${baseUrl}/reviews`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(reviewData)
+                });
+                let out = await res.json();
+                console.log(out)
+                if (out.message) {
+                    alert("Recenzie adăugată!");
+                } else alert("Eroare!");
+
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Ceva nu a funcționat!");
+            }
+        }
+
+        function addReviewToPage(review) {
+            const reviewSection = document.querySelector('.swiper-wrapper');
+            const newSlide = document.createElement('div');
+            newSlide.className = 'swiper-slide slide';
+            newSlide.innerHTML = `
+        <p>${review.opinion}</p>
+        <div class="user">
+            <img src="${review.imagePath}" alt="">
+            <div class="info">
+                <h3>${review.name}</h3>
+                <span>${review.profession}</span>
+            </div>
+            <i class="fas fa-quote-left"></i>
+        </div>
+    `;
+            reviewSection.appendChild(newSlide);
+        }
+
+        document.getElementById('cameraButton').addEventListener('click', function () {
+            document.getElementById('fileInput').click();
+        });
+
+    </script>
+</body>
+
+</html>

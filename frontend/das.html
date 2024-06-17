@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+
+  <!-- Montserrat Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./css/das.css">
+</head>
+<body>
+<div class="grid-container">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="menu-icon" onclick="openSidebar()">
+      <span class="material-icons-outlined">menu</span>
+    </div>
+    <div class="header-left">
+      <span class="material-icons-outlined">search</span>
+    </div>
+    <div class="header-right">
+      <span class="material-icons-outlined">notifications</span>
+      <span class="material-icons-outlined">mail_outline</span>
+      <span class="material-icons-outlined">person_outline</span>
+    </div>
+  </header>
+  <!-- End Header -->
+
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <div class="sidebar-title">
+      <div class="sidebar-brand">
+        <span class="material-icons-outlined">dashboard</span> Administarre
+      </div>
+      <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+    </div>
+
+    <ul class="sidebar-list">
+      <li class="sidebar-list-item">
+        <a href="#" target="_blank">
+          <span class="material-icons-outlined">dashboard</span> Dashboard
+        </a>
+      </li>
+      <li class="sidebar-list-item">
+        <a href="#" target="_blank">
+          <span class="material-icons-outlined">group</span> Utilizatori
+        </a>
+      </li>
+ <!-- Sidebar List Item for Abonamente -->
+<li class="sidebar-list-item">
+    <a href="#" target="_blank">
+        <span class="material-icons-outlined">card_membership</span> Abonamente
+    </a>
+</li>
+
+      <li class="sidebar-list-item">
+        <a href="#" target="_blank">
+          <span class="material-icons-outlined">rate_review</span> Recenzii
+        </a>
+      </li>
+      <li class="sidebar-list-item">
+        <a href="#" target="_blank">
+          <span class="material-icons-outlined">fitness_center</span> Antrenori
+        </a>
+      </li>
+      <li class="sidebar-list-item">
+        <a href="#" target="_blank">
+          <span class="material-icons-outlined">bar_chart</span> Rapoarte
+        </a>
+      </li>
+      <li class="sidebar-list-item">
+        <a href="#" target="_blank">
+          <span class="material-icons-outlined">settings</span> Setari
+        </a>
+      </li>
+    </ul>
+  </aside>
+  <!-- End Sidebar -->
+
+  <!-- Main -->
+  <main class="main-container">
+    <div class="main-title">
+      <p class="font-weight-bold">DASHBOARD</p>
+    </div>
+
+    <div class="main-cards">
+
+      <div class="card">
+        <div class="card-inner">
+          <p class="text-primary">UTILIZATORI</p>
+          <span class="material-icons-outlined text-blue">group</span>
+        </div>
+        <span class="text-primary font-weight-bold">249</span>
+      </div>
+
+      <div class="card">
+        <div class="card-inner">
+          <p class="text-primary">RECENZII</p>
+          <span class="material-icons-outlined text-orange">rate_review</span>
+        </div>
+        <span class="text-primary font-weight-bold">83</span>
+      </div>
+
+      <div class="card">
+        <div class="card-inner">
+          <p class="text-primary">INCASARI</p>
+          <span class="material-icons-outlined text-green">payments</span>
+        </div>
+        <span class="text-primary font-weight-bold">79</span>
+      </div>
+
+      <div class="card">
+        <div the "card-inner">
+          <p class="text-primary">ANTRENORI</p>
+          <span class="material-icons-outlined text-red">fitness_center</span>
+        </div>
+        <span class="text-primary font-weight-bold">56</span>
+      </div>
+
+    </div>
+
+  </main>
+  <!-- End Main -->
+
+</div>
+
+<!-- Scripts -->
+<!-- ApexCharts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+<!-- Custom JS -->
+
+</body>
+</html>

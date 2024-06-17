@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+
+    <link rel="stylesheet" href="css/appointment.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="./script/appointment.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+    <header class="header">
+
+        <a href="./index.html" class="logo"> <span>SO</span>FIT </a>
+
+    </header>
+    <section class="input-part">
+        <div id="main_cont">
+            <div id="navbar">
+                <a href="paticularAppointment.html" id="all_appointment">Toate întâlnirile</a>
+            </div>
+            <div id="main_body">
+                <div>
+                    <input id="inputdate" type="date" placeholder="Select the appointment date" />
+                </div>
+                <div>
+                    <select name="slot" id="slot-select">
+                        <option value="">--Te rog alege o opțiune--</option>
+                        <option value="6-8">7:00 - 9:00</option>
+                        <option value="9-11">9:00 - 11:00</option>
+                        <option value="4-6">14:00 - 16:00</option>
+                        <option value="7-9">18:00 - 20:00</option>
+                    </select>
+                </div>
+                <div>
+                    <select name="trainer" id="trainer-select">
+                        <option value="">--Alege un antrenor--</option>
+                        <option value="Trainer1">Popescu David</option>
+                        <option value="Trainer2">Baciu Sorina</option>
+                        <option value="Trainer3">Simion Andrei</option>
+                        <option value="Trainer4">Simionescu Luca</option>
+                    </select>
+                </div>
+                <div>
+                    <button id="book_appointment">Rezervă acum</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="footer">
+
+        <div class="box-container">
+
+            <div class="box">
+                <h3>Apasă aici</h3>
+                <a class="links" href="#home">Acasa</a>
+                <a class="links" href="#about">Despre noi </a>
+                <a class="links" href="#features">features</a>
+                <a class="links" href="#pricing">Prețuri</a>
+                <a class="links" href="#trainers">Antrenori</a>
+                
+            </div>
+
+            <div class="box">
+                <h3>Program</h3>
+                <p> Luni : <i> 7:00 - 22:30</i> </p>
+                <p> Marți : <i> 7:00 - 22:30 </i> </p>
+                <p> Miercuri : <i> 7:00 - 22:30 </i> </p>
+                <p> Joi : <i> 7:00- 22:30 </i> </p>
+                <p> Vineri : <i> 7:00 - 22:30 </i> </p>
+                <p> Sambată : <i> 7:00 - 21:30 </i> </p>
+                <p> duminica : <i> inchis </i> </p>
+            </div>
+
+            <div class="box">
+                <h3>Contact</h3>
+                <p> <i class="fas fa-phone"></i>0749209355 </p>
+                <p> <i class="fas fa-phone"></i> 0748244885</p>
+                <p> <i class="fas fa-envelope"></i> sofit@gmail.com </p>
+                <p> <i class="fas fa-map"></i> Bucuresti, Romania - 077191 </p>
+                <div class="share">
+                    <a href="https://www.facebook.com/" target="_blank" class="fab fa-facebook-f"></a>
+                    <a href="https://twitter.com/" target="_blank" class="fab fa-twitter"></a>
+                    <a href="https://www.pinterest.com/" target="_blank" class="fab fa-pinterest"></a>
+                    <a href="https://www.linkedin.com/" target="_blank" class="fab fa-linkedin"></a>
+                </div>
+            </div>
+
+            <div class="box">
+                <h3>Abonează-te pentru noile informații</h3>
+                <p> ❤️</p>
+                <form action="">
+                    <input type="email" name="" class="email" placeholder="tastează-ți email-ul" id="">
+                    <input type="submit" value="subscribe" class="btn">
+                </form>
+            </div>
+
+        </div>
+
+    </section>
+</body>
+<script type="text/javascript">
+    $(function(){
+        var dtToday = new Date();
+     
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+         day = '0' + day.toString();
+        var maxDate = year + '-' + month + '-' + day;
+        $('#inputdate').attr('min', maxDate);
+    });
+    document.getElementById('book_appointment').addEventListener('click', function() {
+    var date = document.getElementById('inputdate').value;
+    var timeSlot = document.getElementById('slot-select').value;
+    
+    // Salvăm datele în sessionStorage
+    sessionStorage.setItem('reservationDate', date);
+    sessionStorage.setItem('reservationTime', timeSlot);
+    
+    // Redirecționare către pagina de cont după salvare
+    window.location.href = 'cont.html'; 
+});
+
+    </script>
+  
+</html>

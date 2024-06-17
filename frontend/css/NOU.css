@@ -1,0 +1,500 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;  /* Asigură-te că folosești min-height în loc de height */
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../home-bg-2.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: auto;  /* Permite defilarea pe întreg body-ul */
+    overflow-y: scroll;
+}
+
+.container {
+    position: relative;
+    height: auto; /* Înlătură înălțimea fixă pentru a permite expansiunea naturală */
+    flex-basis: 390px;
+    padding: 20px;
+    overflow: visible; /* Asigură-te că overflow este setat la visible sau elimină proprietatea */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: rgba(0,0,0,0.8);
+    border-radius: 10px;
+    margin-right: 20px; /* Adaugă un spațiu la partea de jos a fiecărui container */
+}
+
+.container1 {
+    position: relative;
+    height: auto; /* Înlătură înălțimea fixă pentru a permite expansiunea naturală */
+    flex-basis: 390px;
+    padding: 20px;
+    overflow: visible; /* Asigură-te că overflow este setat la visible sau elimină proprietatea */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    background-color: rgba(0,0,0,0.8);
+    border-radius: 10px;
+    margin-left: 20px; /* Adaugă un spațiu la partea de sus a containerului secundar */
+}
+
+/* Asigură-te că inputurile și etichetele sunt vizibile și ușor de accesat */
+.input-area input, .input-area label {
+    z-index: 2; /* Poziționează inputurile și etichetele peste alte elemente din fundal */
+}
+/* Stiluri pentru butonul de ștergere */
+.delete-btn {
+    width: 100%;
+    height: 3rem;
+    margin-top: 1rem; /* Spațiu între butoane, dacă este necesar */
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 1.4rem;
+    cursor: pointer;
+    border-radius: 2rem;
+    background: rgb(255, 50, 50); /* Culoare roșu pentru a indica o acțiune de ștergere */
+    transition: all 0.3s ease;
+}
+
+.delete-btn:hover {
+    background: transparent;
+    border: 2px solid #fff;
+    letter-spacing: 2px; /* Efect la hover pentru a sublinia acțiunea */
+}
+
+
+/* Optional: Ajustează stilurile pentru dispozitivele mobile pentru a îmbunătăți accesibilitatea */
+@media screen and (max-width: 360px) {
+    .container {
+        padding: 10px; /* Reduce padding-ul pe dispozitivele mobile */
+    }
+}
+
+.login-wrap,
+.signup-wrap {
+    padding: 2rem 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -90%);
+    height: auto;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    box-sizing: border-box;
+    transition: all 0.4s ease;
+}
+
+.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, -50%);
+}
+
+.title h1 {
+    padding-bottom: 1.2rem;
+    position: relative;
+    color: #fff;
+    font-size: 2.8rem;
+    text-align: center;
+}
+
+.title h1::before {
+    position: absolute;
+    content: '';
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 0.8rem;
+    width: 7rem;
+    background: rgb(255, 116, 47);
+    border-radius: 1rem;
+    clip-path: polygon(0 0, 0% 100%, 100% 0);
+}
+
+form {
+    margin-top: 3rem;
+}
+
+.input-area {
+    margin-top: 2.4rem;
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+
+.input-area input {
+    width: 90%;
+    height: 3rem;
+    color: #fff;
+    font-size: 1.2rem;
+    border: 2px solid #fff;
+    border-radius: 2rem;
+    outline: none;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1rem);
+    padding: 0 1.4rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.input-area input:focus {
+    width: 100%;
+}
+
+.input-area label {
+    position: absolute;
+    top: 50%;
+    left: 2.6rem;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.input-area input:focus~label {
+    transform: translateY(-3rem);
+    left: 1rem;
+}
+
+.input-area input:valid~label {
+    transform: translateY(-3rem);
+}
+
+.forgot-pass {
+    margin-top: 0.4rem;
+    position: relative;
+}
+
+.forgot-pass a {
+    position: absolute;
+    top: 0;
+    left: 2.6rem;
+    color: #eff;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.forgot-pass a:hover {
+    color: rgb(255, 116, 47);
+}
+
+.button-area {
+    margin-top: 4rem;
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
+button {
+    width: 8rem;
+    height: 3rem;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 1.4rem;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 2rem;
+    background: rgb(255, 116, 47);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    width: 50%;
+    letter-spacing: 2px;
+    background: transparent;
+    border: 2px solid #fff;
+}
+
+.form-toggle-area {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+.form-toggle-area p {
+    color: #eee;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.form-toggle-area p span {
+    color: #eff;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.form-toggle-area p span:hover {
+    color: rgb(255, 116, 47);
+}
+
+@media screen and (max-width: 360px) {
+    .title h1 {
+        font-size: 2.6rem;
+    }
+
+    .login-wrap,
+    .signup-wrap {
+        padding: 2rem 0.2rem;
+    }
+
+    .input-area input {
+        font-size: 1.1rem;
+    }
+
+    .input-area label {
+        font-size: 1.1rem;
+    }
+
+    button {
+        font-size: 1.2rem;
+    }
+
+    .form-toggle-area p {
+        font-size: 0.9rem;
+    }
+}
+/* Stiluri pentru formularul de înregistrare */
+
+.signup-wrap .input-area:nth-child(4),
+.signup-wrap .input-area:nth-child(5),
+.signup-wrap .input-area:nth-child(6),
+.signup-wrap .input-area:nth-child(7) {
+    margin-top: 1.5rem; /* Am redus spațiul între câmpuri */
+}
+
+.signup-wrap .input-area input[type="text"],
+.signup-wrap .input-area input[type="email"],
+.signup-wrap .input-area input[type="password"],
+.signup-wrap .input-area input[type="tel"] {
+    width: 90%;
+    height: 3rem;
+    color: #fff;
+    font-size: 1.2rem;
+    border: 2px solid #fff;
+    border-radius: 2rem;
+    outline: none;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1rem);
+    padding: 0 1.4rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.signup-wrap .input-area label {
+    position: absolute;
+    top: 50%;
+    left: 2.6rem;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.signup-wrap .input-area input:focus~label,
+.signup-wrap .input-area input:valid~label {
+    transform: translateY(-3rem);
+    left: 1rem;
+}
+
+/* Stiluri pentru butonul de înregistrare */
+
+.signup-wrap .button-area button.signup-btn {
+    width: 100%;
+    height: 3rem;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 1.4rem;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 2rem;
+    background: rgb(255, 116, 47);
+    transition: all 0.3s ease;
+}
+
+.signup-wrap .button-area button.signup-btn:hover {
+    width: 100%;
+    letter-spacing: 2px;
+    background: transparent;
+    border: 2px solid #fff;
+}
+/* Adăugăm stiluri pentru noua casetă de rezervare */
+.input-area:nth-child(5),
+.input-area:nth-child(6),
+.input-area:nth-child(7),
+.input-area:nth-child(8),
+.input-area:nth-child(9) {
+    margin-top: 1.5rem;
+}
+
+/* Adăugăm stiluri pentru imaginea codului QR */
+.qr-code {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.qr-code img {
+    width: 140px; /* Ajustează dimensiunea imaginii după nevoie */
+    height: auto;
+    border: 1px solid #fff; /* Adaugă un contur */
+    border-radius: 10px; /* Rotunjirea marginilor */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Efect de umbrire */
+}
+
+/* Alte stiluri rămân neschimbate */
+/* Stiluri pentru butoanele din formular */
+.button-area button {
+    width: 100%;
+    height: 3rem;
+    margin-top: 1rem; /* Adaugă spațiu între butoane, dacă este necesar */
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 1.4rem;
+    cursor: pointer;
+    border-radius: 2rem;
+    background: rgb(255, 116, 47); /* Culoare roșu pentru indicația unei acțiuni de ștergere */
+    transition: all 0.3s ease;
+}
+
+.button-area button:hover {
+    background: transparent;
+    border: 2px solid #fff;
+    letter-spacing: 2px; /* Efect la hover pentru a sublinia acțiunea */
+}
+.qr-code p {
+    color: #fff; /* Setează culoarea textului alb */
+    font-size: 1.2rem; /* Dimensiunea fontului */
+    text-align: center; /* Aliniază textul în centru */
+    margin-bottom: 1rem; /* Adaugă un spațiu sub text înainte de imagine */
+}
+/* Stiluri pentru secțiunea datelor contului */
+.account-data, .booking-data {
+    padding: 20px;
+    margin: 10px 0;
+    background-color: rgba(255,255,255,0.1); /* fundal ușor transparent pentru distincție */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.account-data {
+    border-top: 4px solid rgb(255, 116, 47); /* o linie de accent pe partea de sus pentru secțiunea contului */
+}
+
+.booking-data {
+    border-top: 4px solid rgb(50, 205, 50); /* o linie de accent verde pentru rezervări */
+}
+
+/* Stiluri pentru butoane pentru a le face să se distingă în cadrul fiecărei secțiuni */
+.button-area .signup-btn, .button-area .delete-btn {
+    width: 90%;
+    padding: 10px 20px;
+    font-size: 1rem; /* ajustează dimensiunea textului pentru a se potrivi cu designul */
+}
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 9%; /* Adjust padding if necessary to make the header slimmer */
+    z-index: 10000;
+    background: #000;
+}
+
+.header .logo {
+    
+    color: #fff;
+    font-size: 2.5rem; /* Reduced from 3rem */
+}
+
+.header .navbar a {
+    display: inline-block;
+    padding: 1rem 2rem; /* Reduced padding for a smaller header */
+    font-size: 1.5rem; /* Reduced from 1.7rem */
+    color: #fff;
+    text-decoration: none; /* Ensures no underline */
+}
+
+.header .navbar a:hover {
+    background: rgb(255, 116, 47);
+}
+
+#menu-btn {
+    font-size: 2.5rem; /* Adjusted to match the new smaller header style */
+    color: #fff;
+    cursor: pointer;
+    display: none;
+}
+
+.home {
+    padding: 0;
+    margin-top: 4rem; /* Adjusted margin to account for a smaller header */
+}
+
+.home .slide {
+    min-height: 70vh;
+    background-size: cover !important;
+    background-position: center !important;
+    padding: 2rem 9%;
+    display: flex;
+    align-items: center;
+}
+
+.home .slide .content {
+    width: 60rem;
+}
+
+.home .slide .content span {
+    font-size: 2rem;
+    color: rgb(255, 116, 47);
+    display: block;
+}
+
+.home .slide .content h3 {
+    font-size: 4.5rem; /* Adjusted for a more harmonious appearance */
+    color: #fff;
+    padding: 1rem 0;
+}
+.logo {
+   
+    font-size: 2.5rem;
+    text-decoration: none; /* Removes underline from the link */
+}
+
+.logo .orange-text {
+    color: rgb(255, 116, 47); /* Orange color */
+}
+
+.logo .white-text {
+    color: #fff; /* White color */
+}
+
+/* Hover effect for the entire link */
+.logo:hover {
+    background: rgb(255, 116, 47); /* Optional: Changes background on hover */
+    text-decoration: none; /* Ensures no underline appears on hover */
+}
+
+/* Specific hover effects for text colors could also be adjusted if needed */
+.logo:hover .orange-text {
+    color: #fff; /* Changes text color on hover, if desired */
+}
+
+.logo:hover .white-text {
+    color: rgb(255, 116, 47); /* Changes text color on hover, if desired */
+}

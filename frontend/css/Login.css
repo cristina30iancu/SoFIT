@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+body {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url('../home-bg-2.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.container {
+    position: relative;
+    height: 600px;
+    flex-basis: 390px;
+}
+
+.login-wrap,
+.signup-wrap {
+    padding: 2rem 1rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -90%);
+    height: auto;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    box-sizing: border-box;
+    transition: all 0.4s ease;
+}
+
+.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translate(-50%, -50%);
+}
+
+.title h1 {
+    padding-bottom: 1.2rem;
+    position: relative;
+    color: #fff;
+    font-size: 2.8rem;
+    text-align: center;
+}
+
+.title h1::before {
+    position: absolute;
+    content: '';
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 0.8rem;
+    width: 7rem;
+    background: rgb(255, 116, 47);
+    border-radius: 1rem;
+    clip-path: polygon(0 0, 0% 100%, 100% 0);
+}
+
+form {
+    margin-top: 3rem;
+}
+
+.input-area {
+    margin-top: 2.4rem;
+    position: relative;
+    display: grid;
+    place-items: center;
+}
+
+.input-area input {
+    width: 90%;
+    height: 3rem;
+    color: #fff;
+    font-size: 1.2rem;
+    border: 2px solid #fff;
+    border-radius: 2rem;
+    outline: none;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1rem);
+    padding: 0 1.4rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.input-area input:focus {
+    width: 100%;
+}
+
+.input-area label {
+    position: absolute;
+    top: 50%;
+    left: 2.6rem;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.input-area input:focus~label {
+    transform: translateY(-3rem);
+    left: 1rem;
+}
+
+.input-area input:valid~label {
+    transform: translateY(-3rem);
+}
+
+.forgot-pass {
+    margin-top: 0.4rem;
+    position: relative;
+}
+
+.forgot-pass a {
+    position: absolute;
+    top: 0;
+    left: 2.6rem;
+    color: #eff;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.forgot-pass a:hover {
+    color: rgb(255, 116, 47);
+}
+
+.button-area {
+    margin-top: 4rem;
+    width: 100%;
+    display: grid;
+    place-items: center;
+}
+
+button {
+    width: 8rem;
+    height: 3rem;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 1.4rem;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 2rem;
+    background: rgb(255, 116, 47);
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    width: 50%;
+    letter-spacing: 2px;
+    background: transparent;
+    border: 2px solid #fff;
+}
+
+.form-toggle-area {
+    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+}
+
+.form-toggle-area p {
+    color: #eee;
+    font-size: 1rem;
+    text-align: center;
+}
+
+.form-toggle-area p span {
+    color: #eff;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.form-toggle-area p span:hover {
+    color: rgb(255, 116, 47);
+}
+
+@media screen and (max-width: 360px) {
+    .title h1 {
+        font-size: 2.6rem;
+    }
+
+    .login-wrap,
+    .signup-wrap {
+        padding: 2rem 0.2rem;
+    }
+
+    .input-area input {
+        font-size: 1.1rem;
+    }
+
+    .input-area label {
+        font-size: 1.1rem;
+    }
+
+    button {
+        font-size: 1.2rem;
+    }
+
+    .form-toggle-area p {
+        font-size: 0.9rem;
+    }
+}
+/* Stiluri pentru formularul de înregistrare */
+
+.signup-wrap .input-area:nth-child(4),
+.signup-wrap .input-area:nth-child(5),
+.signup-wrap .input-area:nth-child(6),
+.signup-wrap .input-area:nth-child(7) {
+    margin-top: 1.5rem; /* Am redus spațiul între câmpuri */
+}
+
+.signup-wrap .input-area input[type="text"],
+.signup-wrap .input-area input[type="email"],
+.signup-wrap .input-area input[type="password"],
+.signup-wrap .input-area input[type="tel"] {
+    width: 90%;
+    height: 3rem;
+    color: #fff;
+    font-size: 1.2rem;
+    border: 2px solid #fff;
+    border-radius: 2rem;
+    outline: none;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1rem);
+    padding: 0 1.4rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.signup-wrap .input-area label {
+    position: absolute;
+    top: 50%;
+    left: 2.6rem;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.signup-wrap .input-area input:focus~label,
+.signup-wrap .input-area input:valid~label {
+    transform: translateY(-3rem);
+    left: 1rem;
+}
+
+/* Stiluri pentru butonul de înregistrare */
+
+.signup-wrap .button-area button.signup-btn {
+    width: 100%;
+    height: 3rem;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 1.4rem;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 2rem;
+    background: rgb(255, 116, 47);
+    transition: all 0.3s ease;
+}
+
+.signup-wrap .button-area button.signup-btn:hover {
+    width: 100%;
+    letter-spacing: 2px;
+    background: transparent;
+    border: 2px solid #fff;
+}
+/* Adăugăm stiluri pentru noua casetă de rezervare */
+.input-area:nth-child(5),
+.input-area:nth-child(6),
+.input-area:nth-child(7),
+.input-area:nth-child(8),
+.input-area:nth-child(9) {
+    margin-top: 1.5rem;
+}
+
+/* Adăugăm stiluri pentru imaginea codului QR */
+.qr-code {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.qr-code img {
+    width: 200px; /* Ajustează dimensiunea imaginii după nevoie */
+    height: auto;
+    border: 1px solid #fff; /* Adaugă un contur */
+    border-radius: 10px; /* Rotunjirea marginilor */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Efect de umbrire */
+}
+
+/* Alte stiluri rămân neschimbate */
+.input-area {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;  /* Asigură spațiu între câmpuri */
+}
+
+input[type="password"] {
+    width: calc(100% - 30px); /* Reducem lățimea pentru a face loc butonului */
+    padding-right: 30px;  /* Asigură spațiu pentru butonul de toggle, evitând suprapunerea textului */
+    box-sizing: border-box; /* Include padding-ul în lățimea totală */
+}
+
+.toggle-password {
+    position: relative;
+    right: 35px; /* Poziționat la 10px de marginea dreaptă a căsuței de input */
+    height: 100%;
+    display: flex;
+    align-items: center; /* Centrează iconița vertical */
+    cursor: pointer;
+}

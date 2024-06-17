@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/NOU.css">
+    <title>Login</title>
+
+</head>
+
+<body>
+    <header class="header">
+
+        <a href="#" class="logo"><span class="orange-text">SO</span><span class="white-text">FIT</span></a>
+
+        <div id="menu-btn" class="fas fa-bars"></div>
+
+        <nav class="navbar">
+            <a href="./index.html">Acasă</a>
+
+        </nav>
+
+    </header>
+
+
+    <div class="container">
+
+        <div class="title">
+            <h1>Contul meu</h1>
+        </div>
+        <!-- Div pentru datele de cont -->
+        <div class="account-section">
+            <form action="#" id="signup-form">
+                <div class="input-area">
+                    <input type="text" id="name" autocomplete="off" required>
+                    <label for="name">Nume</label>
+                </div>
+                <div class="input-area">
+                    <input type="email" id="mail" autocomplete="off" required>
+                    <label for="mail">Email</label>
+                </div>
+                <div class="input-area">
+                    <input type="text" id="address" autocomplete="off" required>
+                    <label for="address">Adresă</label>
+                </div>
+                <div class="input-area">
+                    <input type="tel" id="phone" autocomplete="off" required>
+                    <label for="phone">Număr de telefon</label>
+                </div>
+                <div class="button-area">
+                    <button type="submit" id="edit" class="signup-btn">Actualizează datele</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container1">
+
+        <div class="booking-section">
+            <form action="#" id="booking-form">
+                <div class="input-area">
+                    <input type="text" id="rezervare" autocomplete="off" required>
+                    <label for="rezervare">Rezervare</label>
+                </div>
+
+                <div class="input-area">
+                    <input type="text" id="ora" autocomplete="off" required>
+                    <label for="ora">Ora Rezervării</label>
+                </div>
+
+                <div class="button-area">
+
+                    <button type="button" class="delete-btn">Șterge rezervarea</button>
+                </div>
+                <div class="qr-code">
+                    <p>Scanează acest cod QR</p>
+                    <p>pentru acces in sală</p>
+                    <img src="images/QR.png" alt="Cod QR">
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+        let baseUrl = `http://localhost:8080`
+        document.addEventListener('DOMContentLoaded', function () {
+            if (sessionStorage.getItem("name")) {
+                document.getElementById('name').value = sessionStorage.getItem("name");
+                document.getElementById('mail').value = sessionStorage.getItem("email");
+                document.getElementById('address').value = sessionStorage.getItem("address");
+                document.getElementById('phone').value = sessionStorage.getItem("phone");
+            }
+        });
+        document.addEventListener('DOMContentLoaded', function () {
+            if (sessionStorage.getItem("token")) {
+                const fields = ['name', 'email', 'address', 'phone'];
+                fields.forEach(field => {
+                    if (sessionStorage.getItem(field)) {
+                        document.getElementById(field).value = sessionStorage.getItem(field);
+                    } else {
+                        console.log(`${field} is missing in sessionStorage`);
+                    }
+                });
+            } else {
+                window.location.href = '/login.html'; // Niciun token, redirect la login
+            }
+        });
+
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var reservationDate = sessionStorage.getItem('reservationDate');
+            var reservationTime = sessionStorage.getItem('reservationTime');
+
+            if (reservationDate && reservationTime) {
+                document.getElementById('rezervare').value = reservationDate;
+                document.getElementById('ora').value = reservationTime;
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const deleteButton = document.querySelector('.delete-btn'); // Selectează butonul de ștergere
+            deleteButton.addEventListener('click', function () {
+                document.getElementById('rezervare').value = ''; // Șterge conținutul câmpului de rezervare
+                document.getElementById('ora').value = ''; // Șterge conținutul câmpului de ora rezervării
+            });
+        });
+
+        document.getElementById("edit").onclick = () => {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('mail').value;
+            const address = document.getElementById('address').value;
+            const phone = document.getElementById('phone').value;
+            const obj = { name, email, address, phone };
+            editUser(obj);
+        }
+
+        async function editUser(obj) {
+            try {
+                let res = await fetch(`${baseUrl}/user/edit`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': sessionStorage.getItem("token")
+                    },
+                    body: JSON.stringify(obj)
+                });
+                let out = await res.json();
+                console.log(out)
+                sessionStorage.setItem("name", obj.name);
+                sessionStorage.setItem("email", obj.email);
+                sessionStorage.setItem("address", obj.address);
+                sessionStorage.setItem("phone", obj.phone);
+
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Ceva nu a funcționat!");
+            }
+        }
+    </script>
+
+</body>
+
+</html>

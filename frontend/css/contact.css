@@ -1,0 +1,89 @@
+/* Stiluri pentru formularul de înregistrare */
+
+.signup-wrap .input-area:nth-child(4),
+.signup-wrap .input-area:nth-child(5),
+.signup-wrap .input-area:nth-child(6),
+.signup-wrap .input-area:nth-child(7) {
+    margin-top: 1.5rem; /* Am redus spațiul între câmpuri */
+}
+
+.signup-wrap .input-area input[type="text"],
+.signup-wrap .input-area input[type="email"],
+.signup-wrap .input-area input[type="password"],
+.signup-wrap .input-area input[type="tel"] {
+    width: 90%;
+    height: 3rem;
+    color: #fff;
+    font-size: 1.2rem;
+    border: 2px solid #fff;
+    border-radius: 2rem;
+    outline: none;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(1rem);
+    padding: 0 1.4rem;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+}
+
+.signup-wrap .input-area label {
+    position: absolute;
+    top: 50%;
+    left: 2.6rem;
+    transform: translateY(-50%);
+    color: #fff;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.signup-wrap .input-area input:focus~label,
+.signup-wrap .input-area input:valid~label {
+    transform: translateY(-3rem);
+    left: 1rem;
+}
+
+/* Stiluri pentru butonul de înregistrare */
+
+.signup-wrap .button-area button.signup-btn {
+    width: 100%;
+    height: 3rem;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 1.4rem;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: 2rem;
+    background: rgb(255, 116, 47);
+    transition: all 0.3s ease;
+}
+
+.signup-wrap .button-area button.signup-btn:hover {
+    width: 100%;
+    letter-spacing: 2px;
+    background: transparent;
+    border: 2px solid #fff;
+}
+body {
+    background-image: url('images/icon1');
+    background-size: cover;
+    background-position: center;
+}
+
+.container {
+    position: relative;
+    height: 100vh; /* Schimbăm înălțimea la 100vh pentru a umple întreaga înălțime a ferestrei */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.signup-wrap {
+    padding: 2rem 1rem;
+    width: 90%;
+    max-width: 400px; /* Limităm lățimea formularului pentru a arăta mai bine */
+    background-color: rgb(255, 116, 47); /* Adăugăm un fundal opac pentru formular */
+    border-radius: 10px; /* Rotunjim colțurile formularului */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Adăugăm o umbra pentru efect de adâncime */
+}
+
+/* Stilurile pentru restul formularului rămân aceleași */

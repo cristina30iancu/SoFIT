@@ -1,0 +1,120 @@
+
+.search-bar button {
+    background-color: #ff6600; /* Culoare de fundal */
+    border: none; /* Fără bordură */
+    color: white; /* Text alb */
+    padding: 10px 20px; /* Spațiere internă */
+    font-size: 16px; /* Mărimea fontului */
+    border-radius: 0 5px 5px 0; /* Rotunjirea colțurilor */
+    cursor: pointer; /* Cursor mână pentru a indica acțiunea */
+    transition: background-color 0.3s; /* Tranziție lină pentru hover */
+}
+
+.search-bar button:hover {
+    background-color: #e65c00; /* Schimbă culoarea la hover */
+}
+
+.search-bar input[type="search"] {
+    padding: 10px;
+    border: 2px solid #ccc; /* Bordură mai subtilă */
+    border-right: none; /* Elimină bordura din dreapta pentru a se îmbina cu butonul */
+    font-size: 16px;
+    border-radius: 5px 0 0 5px; /* Rotunjirea colțurilor pentru input */
+}
+
+.search-bar {
+    display: flex; /* Elementele să fie aliniate pe orizontală */
+    align-items: center; /* Centrare verticală a elementelor */
+    justify-content: center; /* Centrare orizontală */
+}
+/* General Recipe Section Styling */
+.recipes {
+    background-color: #f8f8f8; /* Fundal deschis pentru secțiunea de rețete */
+    padding: 40px 0; /* Spațiere în jurul secțiunii */
+    width: 100%; /* Asigură că secțiunea ocupă lățimea completă */
+}
+
+.recipes .container {
+    width: 100%;
+    margin: auto;
+    padding: 0 20px; /* Spațiere pe părți pentru a evita atingerea marginilor ferestrei */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Aliniază conținutul la centru pentru o distribuție mai bună a spațiului */
+}
+
+/* Individual Recipe Card Styling */
+.recipes .recipe {
+    width: 100%; /* Lățimea completă a containerului */
+    background: #ffffff; /* Fundal alb pentru contrast */
+    padding: 20px;
+    border-radius: 8px; /* Colțuri rotunjite */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Adaugă umbră pentru adâncime */
+    margin: 20px 0; /* Spațiere pentru fiecare card */
+    text-align: left; /* Aliniere la stânga pentru text */
+}
+
+.recipes .recipe img {
+    width: 600px; /* Lățime completă a cardului rețetei */
+    height: 600; /* Înălțime automată pentru a menține proporțiile */
+    object-fit: cover; /* Se asigură că imaginea acoperă zona frumos */
+    border-radius: 5px; /* Colțuri rotunjite pentru imagini */
+}
+
+.recipes .recipe h3 {
+    margin-top: 15px; /* Spațiu între imagine și titlu */
+    color: #333; /* Culoare închisă pentru titlu */
+    font-size: 24px; /* Mărime font pentru lizibilitate */
+}
+
+/* Highlighting "Ingredients" and "Instructions" */
+.recipe h3, .recipe strong {
+    color: #FF6F61; /* Culoare roșie pentru titluri și subtitluri */
+    font-size: 26px; /* Mărime font mai mare pentru evidențiere */
+}
+
+.recipes .recipe p, .recipes .recipe ul, .recipes .recipe ol {
+    color: #666; /* Gri mai deschis pentru descriere */
+    font-size: 18px; /* Mărime font mai mică pentru descrieri */
+    margin-top: 10px; /* Spațiu între titlu și text */
+}
+
+/* Media Queries for Responsive Layouts */
+@media (max-width: 1024px) {
+    .recipes .recipe {
+        width: 100%; /* Carduri de lățime completă pe dispozitivele tablet */
+    }
+}
+
+@media (max-width: 768px) {
+    .recipes .recipe {
+        margin: 10px 0; /* Reduce spațiul pe dispozitive mobile */
+    }
+}
+.recipe-content {
+    display: flex;
+    align-items: flex-start; /* Asigură alinierea la partea de sus */
+    margin-bottom: 20px; /* Spațiu la baza fiecărei rețete */
+}
+
+.recipe-content img {
+    width: 50%; /* Lățimea imaginii este setată la 50% din container */
+    height: auto; /* Înălțimea este automată pentru a păstra proporțiile */
+    float: left; /* Imaginea este aliniată la stânga */
+    margin-right: 30px; /* Măresc spațiul dintre imagine și text */
+    border-radius: 8px; /* Colțuri rotunjite pentru estetică */
+}
+
+.recipe-content > div {
+    flex: 1; /* Ocupă restul spațiului disponibil */
+    padding-left: 30px; /* Spațiu suplimentar la stânga pentru text, ajustat de la 20px la 30px */
+}
+
+.recipe h3, .recipe strong {
+    color: #FF6F61; /* Titlurile și textele importante sunt în culoare roșie */
+    font-size: 24px; /* Dimensiunea fontului pentru titluri */
+}
+
+.recipe ul, .recipe ol {
+    padding-left: 20px; /* Padding la stânga pentru listele din text */
+}

@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <title>Calorie Calculator</title>
+
+    <style>
+      #loading, #results {
+        display: none;
+      }
+      #loading {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-7 mx-auto">
+          <div class="card card-body text-center mt-5">
+            <h1 class="heading display-5 pb-3">Calcul Calorii</h1>
+            <form id="calorie-form">
+
+              <div class="form-group row">
+                <label for="age" class="col-sm-2 col-form-label">Vârstă</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" id="age" placeholder="Vârste 15-80">
+                </div>
+              </div>
+
+              <fieldset class="form-group">
+                <div class="row">
+                  <legend class="col-form-label col-sm-2 pt-0">Gen</legend>
+                  <div class="col-sm-10" id="form-radio">
+                    <div class="custom-control custom-radio custom-control-inline">
+                      <input type="radio" id="male" name="customRadioInline1" class="custom-control-input" checked="checked">
+                      <label class="custom-control-label" for="male">Masculin</label>
+                    </div>
+                    <div class="custom-control custom-radio custom-control-inline">
+                      <input type="radio" id="female" name="customRadioInline1" class="custom-control-input">
+                      <label class="custom-control-label" for="female">Feminin</label>
+                    </div>  
+                  </div>
+                </div> 
+              </fieldset> 
+
+              <div class="form-group row">
+                <label for="weight" class="col-sm-2 col-form-label">Greutate</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" id="weight" placeholder="În kilograme">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="height" class="col-sm-2 col-form-label">Înălțime</label>
+                <div class="col-sm-10">
+                  <input type="number" class="form-control" id="height" placeholder="În centimetri">
+                </div>
+              </div>
+              
+              <div class="form-group row">
+                <legend class="col-form-label col-sm-2 pt-0">Activitate</legend>
+                <div class="col-sm-10"> <!-- Modificat d la col-sm-10 la col-sm-6 pentru a face caseta de selecție mai mică -->
+                    <select class="custom-select" id="list">
+                        <option selected value="1">Sedentar (puțină sau deloc activitate fizică)</option>
+                        <option value="2">Ușor activ (activitate fizică/ sport 1-3 zile pe săptămână)</option>
+                        <option value="3">Moderat activ (activitate fizică/ sport 3-5 zile pe săptămână)</option>
+                        <option value="4">Foarte activ (activitate fizică/ sport intens 6-7 zile pe săptămână)</option>
+                        <option value="5">Extra activ (activitate fizică/ sport foarte intens și muncă fizică sau antrenamente duble)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <legend class="col-form-label col-sm-2 pt-0">Obiectiv</legend>
+                <div class="col-sm-10">
+                    <select class="custom-select" id="goal">
+                        <option value="0">Alegeți obiectivul</option>
+                        <option value="1">Mentenanță</option>
+                        <option value="2">Slăbire și Definire</option>
+                        <option value="3">Masă Musculară</option>
+                    </select>
+                </div>
+            </div>
+            
+
+              <div class="form-group">
+                <input type="submit" value="Calculează" class="btn btn-primary btn-block" style="background-color: rgb(255, 116, 47);">
+              </div>
+              <div class="form-group">
+                <a href="index.html" style="display: block; width: 100%; padding: 8px 0; text-align: center; font-size: 16px; background-color: rgb(255, 116, 47); color: white; border: none; cursor: pointer; text-decoration: none; border-radius: 4px;">
+                    Înapoi
+                </a>
+              </div>
+              
+            </form>
+
+            <div id="loading">
+              <img src="./images/Loading.gif" alt="">
+            </div>
+
+            <div id="results" class="pt-4">
+              <h5>Total Calorii</h5>
+              <div class="form-group">
+                <div class="input-group">
+                  <input type="number" class="form-control" id="total-calories" disabled>
+                </div>
+              </div>                       
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script src="./script/calculator.js"></script>
+  </body>
+</html>

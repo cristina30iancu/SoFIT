@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/Profile.css">
+    <title>Profil</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- profile form -->
+
+            <div class="background-image"></div>
+            <!-- Restul codului -->
+       
+        
+        <div class="profile-wrap active">
+            <div class="title">
+                <h1>Contul meu</h1>
+            </div>
+
+            <form action="#">
+                <div class="input-area">
+                    <label for="name">Nume</label>
+                    <input type="text" id="email" autocomplete="off" required>
+              
+                </div>
+
+                <div class="input-area">
+                    <label for="password">Parolă</label>
+                    <input type="password" id="password" required>
+         
+                </div>
+
+                <div class="button-area">
+                    <button type="submit" class="update-btn">Actualizează profilul</button>
+                </div>
+            </form>
+
+           
+        </div>
+
+        <!-- change password form -->
+        <div class="change-password-wrap">
+            <div class="title">
+                <h1>Schimbă parola</h1>
+            </div>
+
+            <form action="#">
+                <div class="input-area">
+                    <input type="password" id="current-password" required>
+                    <label for="current-password">Parola curentă</label>
+                </div>
+
+                <div class="input-area">
+                    <input type="password" id="new-password" required>
+                    <label for="new-password">Noua parolă</label>
+                </div>
+
+                <div class="input-area">
+                    <input type="password" id="confirm-new-password" required>
+                    <label for="confirm-new-password">Confirmă noua parolă</label>
+                </div>
+
+                <div class="button-area">
+                    <button type="submit" class="change-password-btn">Schimbă parola</button>
+                </div>
+            </form>
+
+            <div class="form-toggle-area">
+                <p><a href="#" id="back-to-profile">Înapoi la profil</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script/Profile.js"></script>
+</body>
+
+</html>

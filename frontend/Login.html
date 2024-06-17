@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/Login.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons/css/boxicons.min.css">
+
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="container">
+        <!-- login form -->
+        <div class="login-wrap active">
+            <div class="title">
+                <h1>Intră în cont</h1>
+            </div>
+
+            <form action="#">
+                <div class="input-area">
+                    <input type="email" id="email" autocomplete="off" required>
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-area">
+                    <input type="password" id="password" required>
+                    <label for="password">Parolă</label>
+                    <!-- Buton pentru vizualizarea/ascunderea parolei -->
+                    <span class="toggle-password" onclick="togglePasswordVisibilityy('password', this)">
+                        <i class="bx bx-hide"></i> <!-- Inițial ascuns -->
+                    </span>
+                </div>
+
+                <div class="remember-me">
+                    <input type="checkbox" id="remember">
+                    <label for="remember">Salvează parola</label>
+                </div>
+
+                <div class="button-area">
+                    <button type="submit" class="login-btn">Intră in cont</button>
+                </div>
+            </form>
+
+            <div class="form-toggle-area">
+                <p>Nu esti membru? <span id="toggle-signup">Inregistrează-te acum</span></p>
+            </div>
+        </div>
+
+        <!-- signup form -->
+        <!-- signup form -->
+<div class="signup-wrap">
+    <div class="title">
+        <h1>Cont nou</h1>
+    </div>
+
+    <form action="#" id="signup-form">
+        <div class="input-area">
+            <input type="text" id="name" autocomplete="off" required>
+            <label for="name">Nume</label>
+        </div>
+
+        <div class="input-area">
+            <input type="email" id="email" autocomplete="off" required>
+            <label for="email">Email</label>
+        </div>
+
+        <div class="input-area">
+            <input type="password" id="signup-password" required>
+            <label for="signup-password">Parola</label>
+            <span class="toggle-password" onclick="togglePasswordVisibilityy('signup-password', this)">
+                <i class="bx bx-hide"></i>
+            </span>
+        </div>
+        <div class="input-area">
+            <input type="password" id="confirm-password" required>
+            <label for="confirm-password">Confirm parola</label>
+            <span class="toggle-password" onclick="togglePasswordVisibilityy('confirm-password', this)">
+                <i class="bx bx-hide"></i>
+            </span>
+        </div>
+        
+        <div class="input-area">
+            <input type="text" id="address" autocomplete="off" required>
+            <label for="address">Localitate</label>
+        </div>
+
+        <div class="input-area">
+            <input type="tel" id="telefon" autocomplete="off" required>
+            <label for="telefon">Număr Telefon</label>
+        </div>
+
+        <div class="button-area">
+            <button type="submit" class="signup-btn">Inregistrează-te acum</button>
+        </div>
+    </form>
+
+    <div class="form-toggle-area">
+        <p>Ai un cont? <span id="toggle-login">Intră in cont</span></p>
+    </div>
+</div>
+
+<script>
+    function togglePasswordVisibility() {
+    var passwordInput = document.getElementById("password");
+    var toggleIcon = document.querySelector(".toggle-password i");
+
+    // Verifica dacă parola este vizibilă
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggleIcon.className = "bx bx-show";  // Actualizează iconița
+    } else {
+        passwordInput.type = "password";
+        toggleIcon.className = "bx bx-hide";  // Revenire la iconița inițială
+    }
+}
+function togglePasswordVisibilityy(passwordId, toggleElement) {
+    var passwordInput = document.getElementById(passwordId);
+    var toggleIcon = toggleElement.querySelector("i");
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggleIcon.className = "bx bx-show";
+    } else {
+        passwordInput.type = "password";
+        toggleIcon.className = "bx bx-hide";
+    }
+}
+
+</script>
+    <script src="script/Login.js"></script>
+</body>
+
+</html>
