@@ -25,7 +25,7 @@ function displayTrainerData(data) {
             <div class="content">
                 <span>${elem.specialization}</span>
                 <h3>${elem.name}</h3>
-                <a href="./appointment.html?id=${elem._id}" class="btn" data-id=${elem._id}>Book Appointment</a>
+                <a href="./appointment.html?id=${elem._id}" class="btn" data-id=${elem._id}>Rezervă</a>
                 <div class="share">
                     <a href="#" class="fab fa-facebook-f"></a>
                     <a href="#" class="fab fa-twitter"></a>

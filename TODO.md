@@ -3,7 +3,7 @@ De făcut:
 - Terminat rezervări
 - Abonamente
 - de aranjat frumos antrenri admin - da
-
+- totu in ro
 
 Modificări efectuate:
 - Etichete grafic admin - da

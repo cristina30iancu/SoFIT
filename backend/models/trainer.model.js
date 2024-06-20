@@ -5,7 +5,6 @@ const trainerSchema = mongoose.Schema({
     age: Number,
     gender: String,
     image: String,
-    price: Number,
     specialization: String,
     timeslot: Array(Object)
 });

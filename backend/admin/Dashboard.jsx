@@ -198,7 +198,6 @@ const Dashboard = () => {
                                     <p>Vârstă: {trainer.age}</p>
                                     <p>Gen: {trainer.gender}</p>
                                     <p>Specializare: {trainer.specialization}</p>
-                                    <p>Preț/oră: {trainer.price} lei</p>
                                 </div>
                             </div>
                         ))}
