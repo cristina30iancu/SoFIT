@@ -8,6 +8,7 @@ const bookingSchema = mongoose.Schema({
     bookingSlot: { type: String, require: true }
 }, { timestamps: true });
 
+
 const Bookingmodel = mongoose.model('booking', bookingSchema);
 
 export { Bookingmodel };

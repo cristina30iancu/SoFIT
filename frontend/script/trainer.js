@@ -14,7 +14,49 @@ async function getTrainerData() {
 }
 getTrainerData()
 
-function displayTrainerData(data) {
+async function getSubs() {
+  const res = await fetch(`http://localhost:8080/subscriptions/user`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': sessionStorage.getItem("token")
+    }
+  });
+
+  const data = await res.json(); console.log(data)
+  if (data.subscriptions && data.subscriptions.length > 0) {
+    return data.subscriptions[0].type
+  }
+  return undefined
+}
+
+async function getRezervari() {
+  try {
+    let res = await fetch(`${baseUrl}/booking/userId`, {
+      headers: {
+        'Authorization': token
+      }
+    });
+    let data = await res.json();
+    console.log(data)
+
+    if (data.Data && data.Data.length >= 7) {
+      return 'style="display:none;"'
+    }
+    return ''
+  } catch (error) {
+    console.error('Error fetching reservations:', error);
+  }
+}
+
+async function displayTrainerData(data) {
+  const type = await getSubs();
+  let hidden = ""
+  if (type == 'Basic Plan') {
+    hidden = 'style="display:none;"'
+  } else {
+    hidden = await getRezervari()
+  }
   boxContainer.innerHTML = ""
   boxContainer.innerHTML = `
      
@@ -25,7 +67,7 @@ function displayTrainerData(data) {
             <div class="content">
                 <span>${elem.specialization}</span>
                 <h3>${elem.name}</h3>
-                <a href="./appointment.html?id=${elem._id}" class="btn" data-id=${elem._id}>Rezervă</a>
+                <a href="./appointment.html?id=${elem._id}" ${hidden}  class="btn" data-id=${elem._id}>Rezervă</a>
                 <div class="share">
                     <a href="#" class="fab fa-facebook-f"></a>
                     <a href="#" class="fab fa-twitter"></a>

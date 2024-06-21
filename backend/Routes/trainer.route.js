@@ -1,5 +1,7 @@
 import express from 'express';
 import { TrainerModel } from '../models/trainer.model.js';
+import { Bookingmodel } from '../models/bookingModel.js';
+import { authenticate } from '../middlewares/authenticateMiddleware.js';
 
 const trainerRouter = express.Router();
 
@@ -83,8 +85,7 @@ trainerRouter.delete('/delete/:id', async (req, res) => {
         console.log(error);
     }
 });
-
-trainerRouter.get('/:trainerId/availability', async (req, res) => {
+trainerRouter.get('/:trainerId/availability', authenticate, async (req, res) => {
     const { trainerId } = req.params;
     const { date } = req.query;
 
@@ -93,14 +94,17 @@ trainerRouter.get('/:trainerId/availability', async (req, res) => {
     }
 
     try {
-        const bookings = await Booking.find({ trainer: trainerId, bookingDate: new Date(date) });
+        const trainersBookings = await Bookingmodel.find({ trainerId, bookingDate: date });
+        const myBookings = await Bookingmodel.find({ userId: req.body.userId, bookingDate: date });
 
-        const bookedSlots = bookings.map(booking => booking.bookingSlot);
+        const trainerBookedSlots = trainersBookings.map(booking => booking.bookingSlot);
+        const userBookedSlots = myBookings.map(booking => booking.bookingSlot);
 
-        res.json({ bookedSlots });
+        res.json({ trainerBookedSlots, userBookedSlots });
     } catch (error) {
         res.status(500).json({ msg: 'Server error', error });
     }
 });
+
 
 export { trainerRouter };

@@ -18,6 +18,7 @@ const authenticate = async (req, res, next) => {
                 } else {
                     const userId = decoded.userId;
                     const email = decoded.email;
+                    console.log('aici ', userId)
                     req.body.userId = userId;
                     req.body.userEmail = email;
                     next();

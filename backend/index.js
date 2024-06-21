@@ -14,7 +14,10 @@ app.use(cors({
     origin: '*'
 }));
 app.use(express.json());
+import { subscriptionRoutes } from './Routes/subscriptionRoutes.js';
 
+// Adaugă această linie pentru a utiliza rutele de abonamente
+app.use('/subscriptions', subscriptionRoutes);
 app.use('/user', signupRoute);
 app.use('/trainer', trainerRouter);
 app.use('/booking', bookingRoutes);

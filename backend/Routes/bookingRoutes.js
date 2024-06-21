@@ -3,6 +3,8 @@ import { Bookingmodel } from '../models/bookingModel.js';
 import { authenticate } from '../middlewares/authenticateMiddleware.js';
 import nodemailer from 'nodemailer';
 import { config as dotenvConfig } from 'dotenv';
+import { TrainerModel } from '../models/trainer.model.js';
+import { SubscriptionModel } from '../models/subscriptionModel.js';
 
 dotenvConfig();
 
@@ -21,8 +23,13 @@ bookingRoutes.get('/', async (req, res) => {
 bookingRoutes.get('/userId', authenticate, async (req, res) => {
     let userId = req.body.userId;
     try {
-        const reqData = await Bookingmodel.find({ userId });
-        res.json({ msg: `All booking data of userId ${userId}`, Data: reqData });
+        const reqData = await Bookingmodel.find({ userId }).populate('trainerId');
+        let toReturn = []
+        for(let book of reqData){
+            const trainer = await TrainerModel.find({_id: book.trainerId})
+            toReturn.push({...book, trainer: trainer})
+        }
+        res.json({ msg: `All booking data of userId ${userId}`, Data: toReturn });
     } catch (error) {
         console.log('error from getting particular user booking data', error.message);
         res.json({ msg: 'error in getting particular user booking data', errorMsg: error.message });
@@ -41,45 +48,16 @@ bookingRoutes.get('/:trainerId', async (req, res) => {
 });
 
 bookingRoutes.post('/create', authenticate, async (req, res) => {
-    const data = req.body;
+    const data = {...req.body, userId: req.body.userId, userEmail:  req.body.userEmail};
+    console.log(data)
     try {
-        let allBookings = await Bookingmodel.find({ trainerId: data.trainerId });
-        if (allBookings.length === 0) {
-            const addData = new Bookingmodel(data);
-            await addData.save();
-        } else {
-            for (let i = 0; i < allBookings.length; i++) {
-                if (allBookings[i].bookingDate === data.bookingDate) {
-                    if (allBookings[i].bookingSlot === data.bookingSlot) {
-                        res.json({ msg: 'This Slot is Not Available.' });
-                        return;
-                    }
-                }
-            }
-            const addData = new Bookingmodel(data);
-            await addData.save();
+        const subscriptions = await Bookingmodel.find({ userId: req.body.userId });
+        if(subscriptions.length >= 7){
+            return res.status(403).json({msg: "Deja ți-ai atins limita!"})
         }
-        const transporter = nodemailer.createTransport({
-            service: 'gmail',
-            auth: {
-                user: 'ajitkhatua286@gmail.com',
-                pass: process.env.emailpassword
-            }
-        });
-        const mailOptions = {
-            from: 'ajitkhatua286@gmail.com',
-            to: `${data.userEmail}`,
-            subject: 'Booking Confirmation from Rapid fit',
-            text: `Your Booking is confirmed on ${data.bookingDate} date at ${data.bookingSlot} slot.`
-        };
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                console.log(error);
-                return res.status(500).json({ message: 'Error while sending confirmation mail' });
-            } else {
-                return res.status(200).json({ message: 'Confirmation sent to email', msg: 'new booking created successfully' });
-            }
-        });
+        const addData = new Bookingmodel(data);
+        await addData.save();
+        return res.status(200).json({msg: "rezervare nouă creată cu succes"})
     } catch (error) {
         console.log('error from adding new booking data', error.message);
         res.json({ msg: 'error in adding new booking data', errorMsg: error.message });

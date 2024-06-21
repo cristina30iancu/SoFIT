@@ -59,31 +59,36 @@
     <div class="container1">
 
         <div class="booking-section">
-            <form action="#" id="booking-form">
-                <div class="input-area">
-                    <input type="text" id="rezervare" autocomplete="off" required>
-                    <label for="rezervare">Rezervare</label>
-                </div>
-
-                <div class="input-area">
-                    <input type="text" id="ora" autocomplete="off" required>
-                    <label for="ora">Ora Rezervării</label>
-                </div>
-
-                <div class="button-area">
-
-                    <button type="button" class="delete-btn">Șterge rezervarea</button>
-                </div>
-                <div class="qr-code">
-                    <p>Scanează acest cod QR</p>
-                    <p>pentru acces in sală</p>
-                    <img src="images/QR.png" alt="Cod QR">
-                </div>
-            </form>
+            <div class="qr-code">
+                <p>Abonamentul tău</p>
+                <p id="tipAb">Tip abonament: </p>
+            </div>
+            <div class="qr-code">
+                <p>Scanează acest cod QR</p>
+                <p>pentru acces in sală</p>
+                <img src="images/QR.png" alt="Cod QR">
+            </div>
         </div>
     </div>
     <script>
         let baseUrl = `http://localhost:8080`
+
+        async function getSubs() {
+            const res = await fetch(`http://localhost:8080/subscriptions/user`, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': sessionStorage.getItem("token")
+                }
+            });
+
+            const data = await res.json(); console.log(data)
+            if (data.subscriptions && data.subscriptions.length > 0) {
+                console.log(data.subscriptions[0])
+                document.getElementById('tipAb').textContent += data.subscriptions[0].type
+            }
+        }
+        getSubs()
         document.addEventListener('DOMContentLoaded', function () {
             if (sessionStorage.getItem("name")) {
                 document.getElementById('name').value = sessionStorage.getItem("name");

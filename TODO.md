@@ -1,9 +1,9 @@
 De făcut:
 
-- Terminat rezervări
-- Abonamente
+- rezervarile nu se fac daca am deja ocupat, eu sau el - da
+- Abonamente - da
 - de aranjat frumos antrenri admin - da
-- totu in ro
+- totu in ro - ok
 
 Modificări efectuate:
 - Etichete grafic admin - da

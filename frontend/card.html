@@ -148,7 +148,7 @@ document.querySelector('.cvv-input').onmouseleave = () =>{
 document.querySelector('.cvv-input').oninput = () =>{
     document.querySelector('.cvv-box').innerText = document.querySelector('.cvv-input').value;
 }
-document.querySelector('.submit-btn').addEventListener('click', function(event) {
+document.querySelector('.submit-btn').addEventListener('click', async function(event) {
     // Oprirea comportamentului implicit de navigare a linkului
     event.preventDefault();
 
@@ -158,11 +158,32 @@ document.querySelector('.submit-btn').addEventListener('click', function(event) 
     var month = document.querySelector('.month-input').value;
     var year = document.querySelector('.year-input').value;
     var cvv = document.querySelector('.cvv-input').value;
+    const type = document.querySelector('.total-amount').innerText.includes('150') ? 'Basic Plan' : 'Premium Plan';
 
     // Verifică dacă toate câmpurile sunt completate
     if (cardNumber.length === 16 && cardHolder !== '' && month !== 'month' && year !== 'year' && cvv.length === 3) {
-        // Dacă toate câmpurile sunt valide, redirecționează la pagina "Login.html"
-        window.location.href = './Login.html';
+        try {
+            const res = await fetch(`http://localhost:8080/subscriptions/create`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': sessionStorage.getItem("token")
+                },
+                body: JSON.stringify({ type })
+            });
+
+            const data = await res.json();
+            if (data.msg.includes('creat cu succes')) {
+                alert('Abonament creat cu succes.');
+                window.location.href = './cont.html';
+            } else {
+                alert('Eroare la crearea abonamentului.');
+            }
+        } catch (error) {
+            console.error('Error creating subscription:', error);
+            alert('Eroare la crearea abonamentului.');
+        }
+        
     } else {
         // Dacă orice câmp nu este completat corect, afișează un mesaj
         alert('Te rog să completezi toate câmpurile corect.');

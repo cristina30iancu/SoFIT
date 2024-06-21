@@ -39,19 +39,26 @@ function getUrlParameter(name) {
 async function updateAvailableSlots() {
     var date = document.getElementById('inputdate').value;
     var trainerId = getUrlParameter('id');
-    console.log(date, trainerId)
+    console.log("Selected Date:", date, "Trainer ID:", trainerId); // Log date and trainerId
     if (date && trainerId) {
         try {
-            let res = await fetch(`${baseUrl}/api/trainers/${trainerId}/availability?date=${date}`);
+            let res = await fetch(`${baseUrl}/trainer/${trainerId}/availability?date=${date}`,  {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': sessionStorage.getItem("token")
+                }
+            });
             let data = await res.json();
+            console.log("API Response Data:", data); // Log the data received from API
             var slotSelect = document.getElementById('slot-select');
             slotSelect.innerHTML = '<option value="">--Te rog alege o oră--</option>';
 
             var startHour = 8;
-            var endHour = 17;
-            for (var hour = startHour; hour <= endHour; hour++) {
+            var endHour = 18; // Changed to 18 to include the 18:00 - 19:00 slot
+            for (var hour = startHour; hour < endHour; hour++) {
                 var slot = `${hour}:00 - ${hour + 1}:00`;
-                if (!data.bookedSlots.includes(`${hour}:00 - ${hour + 1}:00`)) {
+                if (!data.trainerBookedSlots.includes(slot) && !data.userBookedSlots.includes(slot)) {
                     var option = document.createElement('option');
                     option.value = slot;
                     option.text = slot;
@@ -64,8 +71,10 @@ async function updateAvailableSlots() {
     }
 }
 
+
 async function bookAnAppointment(obj, token, name) {
     try {
+        console.log('obj is', obj)
         let res = await fetch(`${baseUrl}/booking/create`, {
             method: 'POST',
             headers: {
@@ -78,8 +87,12 @@ async function bookAnAppointment(obj, token, name) {
         if (out.msg == "Acest slot nu este disponibil.") {
             alert("Acest slot nu este disponibil.");
         } else if (out.msg == "rezervare nouă creată cu succes") {
-            alert(`Hii ${name}, Rezervarea dvs. este confirmată pe ${obj.bookingDate}`);
-        } else {
+            alert(`${name}, Rezervarea dvs. este confirmată pe ${obj.bookingDate}`);
+            updateAvailableSlots()
+        } else if(out.msg == "Deja ți-ai atins limita!"){
+            alert(out.msg);
+        }
+        else {
             alert("Ceva nu a funcționat!");
         }
     } catch (error) {

@@ -10,6 +10,40 @@ if (sessionStorage.getItem("token")) {
     document.getElementById("logout").style.display = "none";
 }
 
+document.getElementById("150").onclick = async () => {
+    const res = await fetch(`http://localhost:8080/subscriptions/user`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': sessionStorage.getItem("token")
+        }
+    });
+
+    const data = await res.json();console.log(data)
+    if(data.subscriptions && data.subscriptions.length > 0){
+        alert("Ai deja un abonament!")
+        window.location.href = "./cont.html"
+    } 
+    else window.location.href = "./card.html?amount=150"
+}
+
+document.getElementById("700").onclick = async () => {
+    const res = await fetch(`http://localhost:8080/subscriptions/user`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': sessionStorage.getItem("token")
+        }
+    });
+
+    const data = await res.json();
+    if(data.subscriptions && data.subscriptions.length > 0){
+        alert("Ai deja un abonament!")
+        window.location.href = "./cont.html"
+    } else window.location.href = "./card.html?amount=700"
+}
+
+
 document.getElementById("logout").onclick = () => {
     sessionStorage.removeItem("name");
     sessionStorage.removeItem("token");
@@ -46,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         pagination: {
             el: '.swiper-pagination',
             clickable: true,
-          },
+        },
         loop: true,
         autoplay: {
             delay: 7500,
@@ -64,7 +98,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     swiper.on('slideChange', () => {
         console.log('Slide changed');
     });
-    
+
     swiper.on('transitionEnd', () => {
         console.log('Transition ended');
     });
