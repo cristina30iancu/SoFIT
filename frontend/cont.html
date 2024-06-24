@@ -59,9 +59,10 @@
     <div class="container1">
 
         <div class="booking-section">
-            <div class="qr-code">
+            <div id="ab" class="qr-code">
                 <p>Abonamentul tău</p>
                 <p id="tipAb">Tip abonament: </p>
+                <button id="delete-ab" class="signup-btn" style="padding: 2px; font-size: 17px; width: 75%;">Dezactivează abonament</button>
             </div>
             <div class="qr-code">
                 <p>Scanează acest cod QR</p>
@@ -72,7 +73,7 @@
     </div>
     <script>
         let baseUrl = `http://localhost:8080`
-
+        let abId = ''
         async function getSubs() {
             const res = await fetch(`http://localhost:8080/subscriptions/user`, {
                 method: 'GET',
@@ -85,7 +86,10 @@
             const data = await res.json(); console.log(data)
             if (data.subscriptions && data.subscriptions.length > 0) {
                 console.log(data.subscriptions[0])
+                abId = data.subscriptions[0]._id
                 document.getElementById('tipAb').textContent += data.subscriptions[0].type
+            } else {
+document.getElementById('ab').style.visibility = "hidden"
             }
         }
         getSubs()
@@ -97,6 +101,25 @@
                 document.getElementById('phone').value = sessionStorage.getItem("phone");
             }
         });
+
+        document.getElementById('delete-ab').onclick = async () => {
+            try {
+                let res = await fetch(`${baseUrl}/subscriptions/remove/${abId}`, {
+                    method: 'DELETe',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': sessionStorage.getItem("token")
+                    }
+                });
+                let out = await res.json();
+                alert(out.msg)
+                window.location.reload()
+
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Ceva nu a funcționat!");
+            }
+        }
         document.addEventListener('DOMContentLoaded', function () {
             if (sessionStorage.getItem("token")) {
                 const fields = ['name', 'email', 'address', 'phone'];

@@ -43,7 +43,7 @@ subscriptionRoutes.delete('/remove/:id', authenticate, async (req, res) => {
 
     try {
         await SubscriptionModel.findByIdAndDelete(id);
-        res.status(200).json({ msg: `Abonamentul cu id ${id} a fost șters cu succes` });
+        res.status(200).json({ msg: `Abonamentul a fost șters cu succes` });
     } catch (error) {
         console.log('error from deleting subscription', error.message);
         res.status(500).json({ msg: 'Server error', errorMsg: error.message });
